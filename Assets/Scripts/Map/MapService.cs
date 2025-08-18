@@ -15,7 +15,21 @@ namespace ServiceLocator.Map
         private Tilemap currentTileMap;
         private MapData currentMapData;
         private SpriteRenderer tileOverlay;
+        public static MapService Instance { get { return instance; } }
+        private static MapService instance;
 
+        private void Awake()
+        {
+            if(instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(this.gameObject);
+                Debug.LogError("Another instance of MapService is being created.");
+            }
+        }
         private void Start()
         {
             SubscribeToEvents();
