@@ -7,8 +7,6 @@ namespace ServiceLocator.Wave.Bloon
 {
     public class BloonController
     {
-        
-      
        
 
         private BloonView bloonView;
