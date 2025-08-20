@@ -9,18 +9,22 @@ namespace ServiceLocator.Map
 {
     public class MapService : GenericMonoSingleton<MapService>
     {
-        [SerializeField] private MapScriptableObject mapScriptableObject;
+         private MapScriptableObject mapScriptableObject;
 
         private Grid currentGrid;
         private Tilemap currentTileMap;
         private MapData currentMapData;
         private SpriteRenderer tileOverlay;
 
-        private void Start()
+      
+
+        public MapService(MapScriptableObject mapScriptableObject)
         {
-            SubscribeToEvents();
+            this.mapScriptableObject = mapScriptableObject;
             tileOverlay = Object.Instantiate(mapScriptableObject.TileOverlay).GetComponent<SpriteRenderer>();
             ResetTileOverlay();
+            SubscribeToEvents();
+
         }
 
         private void SubscribeToEvents() => EventService.Instance.OnMapSelected.AddListener(LoadMap);
