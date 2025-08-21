@@ -34,6 +34,12 @@ namespace ServiceLocator.Main
 
         private void Start()
         {
+            CreateServices();
+            CreateDependencies();
+        }
+
+        private void CreateServices()
+        {
             EventService = new EventService();
             UIService.SubscribeToEvents();
             MapService = new MapService(mapScriptableObject);
@@ -42,6 +48,15 @@ namespace ServiceLocator.Main
             PlayerService = new PlayerService(playerScriptableObject);
         }
 
+        private void CreateDependencies()
+        {   
+            PlayerService.InitializeDependices(
+                uiService,
+                MapService,
+                SoundService
+            );
+
+        }
         private void Update()
         {
             PlayerService.Update();

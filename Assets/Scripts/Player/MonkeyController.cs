@@ -17,7 +17,7 @@ namespace ServiceLocator.Player
 
         public MonkeyController(MonkeyScriptableObject monkeyScriptableObject, ProjectilePool projectilePool)
         {
-            monkeyView = Object.Instantiate(monkeyScriptableObject.Prefab);
+            monkeyView =  GameObject.Instantiate(monkeyScriptableObject.Prefab);
             monkeyView.SetController(this);
             monkeyView.SetTriggerRadius(monkeyScriptableObject.Range);
             
