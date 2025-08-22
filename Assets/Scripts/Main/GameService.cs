@@ -49,12 +49,23 @@ namespace ServiceLocator.Main
         }
 
         private void CreateDependencies()
-        {   
+        {
+            MapService.IntializeDependencies(EventService);
+
+            uiService.IntializeDependencies(WaveService, EventService);
             PlayerService.InitializeDependices(
                 uiService,
                 MapService,
                 SoundService
             );
+            WaveService.InitializeDependencies(
+                uiService,
+                MapService,
+                SoundService,
+                EventService
+            );
+
+            
 
         }
         private void Update()
