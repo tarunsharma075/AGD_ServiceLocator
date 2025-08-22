@@ -52,7 +52,7 @@ namespace ServiceLocator.Main
         {
             MapService.IntializeDependencies(EventService);
 
-            uiService.IntializeDependencies(WaveService, EventService);
+            uiService.IntializeDependencies(WaveService, EventService,PlayerService);
             PlayerService.InitializeDependices(
                 uiService,
                 MapService,
