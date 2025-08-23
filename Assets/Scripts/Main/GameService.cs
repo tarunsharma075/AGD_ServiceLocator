@@ -36,13 +36,30 @@ public class GameService:GenericMonoSingleton<GameService>
 
     void Start()
     {
+        CreateService();
+        createInit();
+
+
+
+    }
+
+    void CreateService()
+    {
         playerService = new PlayerService(playerScriptableObject);
         soundService = new SoundService(soundScriptableObject, audioEffects, backgroundMusic);
         WaveService = new WaveService(waveScriptableObject);
         MapService = new MapService(mapScriptableObject);
     }
 
-  
+
+    void createInit()
+    {
+        playerService.Init(MapService, uIService, soundService);    
+        WaveService.Init(MapService, uIService, soundService,playerService);
+        uIService.init(WaveService,playerService);
+    }
+
+
     void Update()
     {
         playerService.Update();

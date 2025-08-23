@@ -9,9 +9,11 @@ namespace ServiceLocator.UI
     {
         private MonkeyCellView monkeyCellView;
         private MonkeyCellScriptableObject monkeyCellSO;
+        private PlayerService PlayerService;
 
-        public MonkeyCellController(Transform cellContainer, MonkeyCellView monkeyCellPrefab, MonkeyCellScriptableObject monkeyCellScriptableObject)
+        public MonkeyCellController(Transform cellContainer, MonkeyCellView monkeyCellPrefab, MonkeyCellScriptableObject monkeyCellScriptableObject,PlayerService playerService)
         {
+            this.PlayerService = playerService;
             this.monkeyCellSO = monkeyCellScriptableObject;
             monkeyCellView = Object.Instantiate(monkeyCellPrefab, cellContainer);
             monkeyCellView.SetController(this);
@@ -20,12 +22,12 @@ namespace ServiceLocator.UI
 
         public void MonkeyDraggedAt(Vector3 dragPosition)
         {
-            GameService.Instance.playerService.ValidateSpawnPosition(monkeyCellSO.Cost, dragPosition);
+            PlayerService.ValidateSpawnPosition(monkeyCellSO.Cost, dragPosition);
         }
 
         public void MonkeyDroppedAt(Vector3 dropPosition)
         {
-            GameService.Instance.playerService.TrySpawningMonkey(monkeyCellSO.Type, monkeyCellSO.Cost, dropPosition);
+            PlayerService.TrySpawningMonkey(monkeyCellSO.Type, monkeyCellSO.Cost, dropPosition);
         }
     }
 }
